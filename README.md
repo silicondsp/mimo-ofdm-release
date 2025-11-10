@@ -1,6 +1,6 @@
 <h1>MIMO OFDM  Block Diagram C Modeling and Simulation </h1>	
 <div style=" text-align: left; text-indent: 0px; padding: 0px 0px 0px 0px; margin: 0px 0px 0px 0px;">
-<table width="400px" border="1" cellpadding="2" cellspacing="2" style="background-color: #ffffff;">
+<table width="600px" border="1" cellpadding="2" cellspacing="2" style="background-color: #ffffff;">
 <tr valign="top">
 <td style="border-width : 0px;"><p style=" text-align: left; text-indent: 0px; padding: 0px 0px 0px 0px; margin: 0px 0px 0px 0px;"><span style=" font-size: 10pt; font-family: 'Arial', 'Helvetica', sans-serif; font-style: normal; font-weight: normal; color: #000000; background-color: transparent; text-decoration: none;"> <a href="https://www.ccdsp.org/"><img src="sd-logo-tm_sm.png" width="104" height="109" alt="sdsp logo" title="" /></a>
 </span></p>
@@ -9,21 +9,13 @@
 </span></p>
 </td>
 </tr>
-<tr valign="top">
-<td style="border-width : 0px;"><br />
-</td>
-<td style="border-width : 0px;"><br />
-</td>
-</tr>
 </table>
 </div>
-<BR>
-<BR>
-Icons <img src="images/noun-links-821764.png" width="30" height="30" alt="link github" title="" />and <img src="images/noun-tools-4827171.png" width="40" height="40" alt="link building" title="" />  
-  Credit the  <a href="https://thenounproject.com/">Noun Project</a>.
-<BR>
-<div style=" text-align: left; text-indent: 0px; padding: 0px 0px 0px 0px; margin: 0px 0px 0px 0px;"><table width="100%" border="1" cellpadding="2" cellspacing="2" style="background-color: #ffffff;">
-<table  style="border: 2px solid #000000; border-collapse: collapse" cellspacing="0" cellpadding="0">
+<p>
+Icons <img src="images/noun-links-821764.png" width="30" height="30" alt="link github" title="" />and<img src="images/noun-tools-4827171.png" width="40" height="40" alt="link building" title="" />Credit the  <a href="https://thenounproject.com/">Noun Project</a>.
+<p>
+<div style=" text-align: left; text-indent: 0px; padding: 0px 0px 0px 0px; margin: 0px 0px 0px 0px;">
+<table  width="100%" style="border: 2px solid #000000; border-collapse: collapse" cellspacing="0" cellpadding="0">	
 <tr valign="top">
 <td width="40" height="15" style="border-width : 0px;"><p style=" text-align: left; text-indent: 0px; padding: 0px 0px 0px 0px; margin: 0px 0px 0px 0px;"><span style=" font-size: 10pt; font-family: 'Arial', 'Helvetica', sans-serif; font-style: normal; font-weight: bold; color: #000000; background-color: transparent; text-decoration: none;">Item</span></p>
 </td>
@@ -70,7 +62,7 @@ Icons <img src="images/noun-links-821764.png" width="30" height="30" alt="link g
 <tr valign="top">
 <td width="40" style="border-width : 0px;"><p style=" text-align: left; text-indent: 0px; padding: 0px 0px 0px 0px; margin: 0px 0px 0px 0px;"><span style="font-size: 10pt; font-family: 'Arial', 'Helvetica', sans-serif; font-style: normal; font-weight: normal; color: #000000; background-color: transparent; text-decoration: none;">5</span></p>
 </td>
-<td width="293" style="border-width : 0px;"><p style=" text-align: left; text-indent: 0px; padding: 0px 0px 0px 0px; margin: 0px 0px 0px 0px;"><span style=" font-size: 10pt; font-family: 'Arial', 'Helvetica', sans-serif; font-style: normal; font-weight: normal; color: #000000; background-color: transparent; text-decoration: none;">List of Topologiies Included in Repository</span>. See this <a href="#tops_list">link</a> for Block Diagrams for Various Topologies</p>
+<td width="293" style="border-width : 0px;"><p style=" text-align: left; text-indent: 0px; padding: 0px 0px 0px 0px; margin: 0px 0px 0px 0px;"><span style=" font-size: 10pt; font-family: 'Arial', 'Helvetica', sans-serif; font-style: normal; font-weight: normal; color: #000000; background-color: transparent; text-decoration: none;">List of Topologies Included in Repository</span>. See this <a href="#tops_list">link</a> for Block Diagrams for Various Topologies</p>
 </td>
 <td width="73" style="border-width : 0px;"><p style=" text-align: left; text-indent: 0px; padding: 0px 0px 0px 0px; margin: 0px 0px 0px 0px;"><span style=" font-size: 10pt; font-family: 'Arial', 'Helvetica', sans-serif; font-style: normal; font-weight: normal; color: #000000; background-color: transparent; text-decoration: none;"><a href="#tops_list"><img src="images/noun-links-821764.png" width="30" height="30" alt="link" title="" /></a></span></p>
 </td>
@@ -311,7 +303,7 @@ See the Block Diagram of a full system <a href="#mimo-ofdm">here</a>.
     <td width="55" valign="top"><p>4x4</p></td>
     <td width="48" valign="top"><p>No</p></td>
     <td width="59" valign="top"><p>1x</p></td>
-    <td width="219" valign="top"><p>Very Long  Range</p></td>
+    <td width="219" valign="top"><p>Very LongÂ  Range</p></td>
   </tr>
 </table>
 <p style="margin-left:1em;"><p style="margin-left:1em;"><p style="margin-left:1em;">
@@ -320,7 +312,7 @@ See the Block Diagram of a full system <a href="#mimo-ofdm">here</a>.
 	<img src="images/line.png" width="1000" height="21" alt=""/><BR>
 <div id="mimo-ofdm">
 <p><img src="images/open_loop_mimo_ofdm_2x2.png" width="1434" height="668" alt=""/></p>
-<h2>Capsim® MIMO OFDM 2x2 Open Loop with Channel Modeling and Noise Specification</h2>
+<h2>CapsimÂ® MIMO OFDM 2x2 Open Loop with Channel Modeling and Noise Specification</h2>
 <p><img src="images/open_loop_mimo_ofdm_2x3.png" width="1171" height="844" alt=""/></p>
 <h2>Capsim&reg; MIMO OFDM 3x2 Open Loop with Channel Modeling and Noise Specificaton</h2>
 <p><img src="images/svd-mimo-2x2.png" width="1251" height="873" alt=""/></p>
@@ -692,7 +684,7 @@ scatter created file: Scatter2.sct
   </p>
 <p>&nbsp;</p>
 <p><BR>
-  <p>Capsim® uses LAPACK via CLAPACK.</p>
+  <p>CapsimÂ® uses LAPACK via CLAPACK.</p>
 
 <p>Anderson, E. and Bai, Z. and Bischof, C. and Blackford, S. and Demmel, J. and Dongarra, J. and Du Croz, J. and Greenbaum, A. and Hammarling, S. and McKenney, A. and Sorensen, D., <strong>LAPACK Users' Guide,</strong>Third Edition,Society for Industrial and Applied Mathematics, Philadelphia, PA, ISBN = 0-89871-447-8, 1999	</p>
   <BR>
