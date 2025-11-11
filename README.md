@@ -171,7 +171,7 @@ section entitled "GNU Free Documentation License". </pre>
 <BR>
 <div id="introduction">
 <h2>Introduction</h2>
-<p style="margin-left:1em;">Silicon DSP Corporation has developed all the C code for a full implementation of a multiple MIMO OFDM Block Diagram Modeling and Simulation  for both Open Loop and Cose Loop MIMO OFDM systems..
+<p style="margin-left:1em;">Silicon DSP Corporation has developed all the C code for a full implementation of a multiple MIMO OFDM Block Diagram Modeling and Simulation Systems  for both Open Loop and Closed Loop MIMO OFDM systems.
 The modular architecture uses individual blocks (written in C)  for the implementation of the various stages in modulation and demodulation.
 Subroutines ( C code) are also supplied with Include files shared between blocks and subroutines.
 See the Block Diagram of a full system <a href="#mimo-ofdm">here</a>.
@@ -180,10 +180,10 @@ See the Block Diagram of a full system <a href="#mimo-ofdm">here</a>.
 <p style="margin-left:1em;">Click  <a href="https://www.youtube.com/playlist?list=PLqL72R3p_ZYLChzqSDrQGYKl_qvCaFW3U">here</a> for the MIMO OFDM Tutorial Videos on <a href="https://www.youtube.com/playlist?list=PLqL72R3p_ZYLChzqSDrQGYKl_qvCaFW3U"><img src="images/yt_logo_rgb_light-300x67.png" width="75" height="17" alt="youtube" title="" /></a>. <!--width="300" height="67" -->
 <BR>
 <p style="margin-left:1em;">For the develepment of the fixed point CORDIC Beam Formimg MIMO-OFDM the methodology used by Nariankadu D. Hemkumar was used. See the reference below.
-<p style="margin-left:1em;">Nariankadu D. Hemkumar, <strong>Efficient VLSI Architectures for Matrix Factorization,</strong> Ph.D. Dissertation, Rice University, April 1994.
+<p style="margin-left:1em;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Nariankadu D. Hemkumar, <strong>Efficient VLSI Architectures for Matrix Factorization,</strong> Ph.D. Dissertation, Rice University, April 1994.
 <p style="margin-left:1em;">The primary author of the Open-Loop and Closed Loop floating point and fixed point MIMO work was Dr. Sasan Ardalan at Silicon DSP Corporation.  See the OFDM repository at <a href="https://github.com/silicondsp/ofdm-release"><img src="images/github-mark.png" width="45" height="45" alt="github"/></a>for credits on the OFDM blocks and subroutines.
 <p style="margin-left:1em;">We highly recommend the following paper for the analysis of the performance of MIMO-OFDM systems:
-<p style="margin-left:1em;">Jie Gao, O. C. Ozdural, S. H. Ardalan and Huaping Liu, &quot;<strong>Performance modeling of MIMO OFDM systems via channel analysis</strong>,&quot; in <em>IEEE Transactions on Wireless Communications,</em> vol. 5, no. 9, pp. 2358-2362, September 2006
+<p style="margin-left:1em;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Jie Gao, O. C. Ozdural, S. H. Ardalan and Huaping Liu, &quot;<strong>Performance modeling of MIMO OFDM systems via channel analysis</strong>,&quot; in <em>IEEE Transactions on Wireless Communications,</em> vol. 5, no. 9, pp. 2358-2362, September 2006
 <p style="margin-left:1em;">Also see the <span style="border-width : 0px;">results of block diagram simulations floating point (LAPACK) versus fixed point CORDIC 2x2 SVD Beam Forming MIMO-OFDM</span> <a href="#results-fxp-floating-point">here</a> <a href="#results-fxp-floating-point"results-fxp-floating-point""><img src="images/noun-links-821764.png" width="30" height="30" alt="link" title="" /></a>in this page.
 <p style="margin-left:1em;">Note that blocks are also provided where instead of fixed point CORDIC, the trigonomic functions are computed in floating point. The blocks help validate the fixed point algorithms.
 <p style="margin-left:1em;"><strong>Note:</strong> this repository supports the Text Mode Kernel version of Capsim&reg;. 
@@ -668,6 +668,7 @@ scatter created file: Scatter2.sct
   
 <p style="margin-left:1em;"> The xscatter file is:
 <p style="margin-left:1em;"> <strong>java -jar /home/research/SDSP_Github/capsim-tmk/TOOLS/IIPPlot.jar -scatter Scatter0.sct -scatter Scatter1.sct </strong><BR>	<p style="margin-left:1em;">The Java program <strong>IIPPlot.jar</strong> is provided with the CapsimTMK repository. Note the nice capability to plot multiple files..
+<p style="margin-left:1em;">For IIPlot Information and Download click <a href="https://www.ccdsp.org/IIPPlot/index.html">here</a>.
 <p style="margin-left:1em;">
 <p style="margin-left:1em;"> With Linux you can send the plot application to run in the background to put plots side by side when you want to display multiple plots. Then bring them to the forgound and use Control C to exit.
 <h2 style="margin-left:1em;">Hierarchical Blocks</h2>
