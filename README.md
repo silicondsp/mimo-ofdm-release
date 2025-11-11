@@ -186,7 +186,7 @@ See the Block Diagram of a full system <a href="#mimo-ofdm">here</a>.
 <p style="margin-left:1em;">Jie Gao, O. C. Ozdural, S. H. Ardalan and Huaping Liu, &quot;<strong>Performance modeling of MIMO OFDM systems via channel analysis</strong>,&quot; in <em>IEEE Transactions on Wireless Communications,</em> vol. 5, no. 9, pp. 2358-2362, September 2006
 <p style="margin-left:1em;">Also see the <span style="border-width : 0px;">results of block diagram simulations floating point (LAPACK) versus fixed point CORDIC 2x2 SVD Beam Forming MIMO-OFDM</span> <a href="#results-fxp-floating-point">here</a> <a href="#results-fxp-floating-point"results-fxp-floating-point""><img src="images/noun-links-821764.png" width="30" height="30" alt="link" title="" /></a>in this page.
 <p style="margin-left:1em;">Note that blocks are also provided where instead of fixed point CORDIC, the trigonomic functions are computed in floating point. The blocks help validate the fixed point algorithms.
-<p style="margin-left:1em;">Note this repository supports the Text Mode Kernel version of Capsim&reg;. 
+<p style="margin-left:1em;"><strong>Note:</strong> this repository supports the Text Mode Kernel version of Capsim&reg;. 
   The graphical block diagram is from the soon to be released Capsim&reg; Version 7 which uses  Qt&reg; for interactive graphical interface. 
   However, the topology in this Repository are the same. You can use the block names in the screen shot and then use the
   Capsim&reg; command  "to blockname" to go the the block, change parameters and run the simulation.
@@ -634,7 +634,7 @@ See the Block Diagram of a full system <a href="#mimo-ofdm">here</a>.
     <BR><BR>
      <p>
 <div id="capsim_ofdm_instructions">
-<h1>    Instructions for Running Capsim&reg; OFDM Block Diagram Simulation.</h1>
+<h1>    Instructions for Running Capsim&reg; MIMO-OFDM Block Diagram Simulation.</h1>
   <p style="margin-left:1em;"><strong>1-</strong> Obtain the Capsim&reg; Text Mode Kernel (CapsimTMK) for Linux  from:
 <p style="margin-left:1em;"><a href="https://github.com/silicondsp/capsim-tmk">GitHub Capsim Text Mode  Repository <img src="images/github-mark.png" width="45" height="45" alt="github"/></a>
 <p style="margin-left:1em;">CapsimTMK is  distributed with hundreds of  blocks. To simulate OFDM systems the blocks in this repository have to be incorporated into Capsim&reg; including subroutines.
