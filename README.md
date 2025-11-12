@@ -148,7 +148,18 @@ Icons <img src="images/noun-links-821764.png" width="30" height="30" alt="link g
 </td>
 <td width="134" style="border-width : 0px;"><span style=" font-size: 10pt; font-family: 'Arial', 'Helvetica', sans-serif; font-style: normal; font-weight: normal; color: #000000; background-color: transparent; text-decoration: none;">Video Tutorial</span><br />
 </td>
-</tr>		
+</tr>
+		
+<tr valign="top">
+<td width="40" style="border-width : 0px;">14<br />
+</td>
+<td width="293" style="border-width : 0px;">Video Capsim Block Diagram Modeling MIMO-OFDM Open Loop 2x2 and 2x3 (must view for insights and better understanding of this Repository)<br />
+</td>
+<td width="73" style="border-width : 0px;"><a href="https://youtu.be/0Q2w50UiKec?list=PLqL72R3p_ZYIfjNC-m1Pu1j9MCIgjgr7T"><img src="images/yt_logo_rgb_light-300x67.png" width="75" height="17" alt="youtube" title="" /></a><br />
+</td>
+<td width="134" style="border-width : 0px;">Video Tutorial<br />
+</td>
+</tr>
 <tr valign="top">
 <td width="40" style="border-width : 0px;"><br />
 </td>
