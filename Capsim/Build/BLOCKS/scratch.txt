@@ -1,0 +1,25 @@
+
+       double *s_P,*t_P,*u_P,*v_P,*w_P,*x_P;
+        float *y1_P,*y2_P;
+        int *trouble_P;
+
+
+
+       trouble_P= (int *)calloc( numberTxAntennas*numberRxAntennas,sizeof(int));
+
+       s_P=(double*)calloc(numberTxAntennas*numberRxAntennas,sizeof(double));
+       t_P=(double*)calloc(numberTxAntennas*numberRxAntennas,sizeof(double));
+       u_P=(double*)calloc(numberTxAntennas*numberRxAntennas,sizeof(double));
+       v_P=(double*)calloc(numberTxAntennas*numberRxAntennas,sizeof(double));
+       w_P=(double*)calloc(numberTxAntennas*numberRxAntennas,sizeof(double));
+       x_P=(double*)calloc(numberTxAntennas*numberRxAntennas,sizeof(double));
+
+       y1_P=(float*)calloc(numberTxAntennas*numberRxAntennas,sizeof(float));
+       y2_P=(float*)calloc(numberTxAntennas*numberRxAntennas,sizeof(float));
+
+       if(!trouble_P || !s_P || !t_P || !u_P || !v_P || !w_P || !x_P || !y1_P || !y2_P) {
+		fprintf(stderr,"cxmimoch: could not allocate space  \n");
+		return(4);
+
+
+       }
