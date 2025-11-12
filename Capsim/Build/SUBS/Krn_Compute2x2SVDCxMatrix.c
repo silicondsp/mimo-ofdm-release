@@ -1,6 +1,6 @@
 
-/*  Capsim (r) Text Mode Kernel (TMK) Blocks Library 
-    Copyright (C) 2007-2017   Silicon DSP  Corporation
+/*  Capsim (r) Text Mode Kernel (TMK) Blocks Library
+    Copyright (C) 2007-2017   Sasan Ardalan
 
     This library is free software; you can redistribute it and/or
     modify it under the terms of the GNU Lesser General Public
@@ -21,7 +21,10 @@
 
 //
 // Author: Sasan Ardalan
-// 
+// Date: 2007
+// Repository: https://github.com/silicondsp/mimo-ofdm-release
+// https://github.com/silicondsp/mimo-ofdm-release/blob/main/Article/MIMO-OFDM_SVD_Computation_CORDIC_Operations.pdf
+//
 
 #include <stdio.h>
 #include <math.h>
@@ -40,15 +43,15 @@ void PrintCxMatrix(dsp_cxMatrix_t *mat_P) {
 
 int i,j;
 
-      
+
         for(i=0; i<mat_P->height; i++)
            for(j=0; j<mat_P->width; j++) {
                    printf("(%d,%d) %f   %f \n", i,j,mat_P->matrix_PP[i][j].re,mat_P->matrix_PP[i][j].im);
-    
-           
+
+
         }
-        
-        
+
+
 }
 
 int Krn_Compute2x2SVDCxMatrix(dsp_cxMatrix_t *mat_P, doubleVector_t *ss_P,dsp_cxMatrix_t *u_P, dsp_cxMatrix_t *v_P){
@@ -57,34 +60,34 @@ int Krn_Compute2x2SVDCxMatrix(dsp_cxMatrix_t *mat_P, doubleVector_t *ss_P,dsp_cx
    	dsp_cxMatrix_t img;
    	int fpixel;
         int len;
-   	
+
    	int M ;
     int N ;
-    
+
 
     int INFO;
 
 	int workLength;
-    
+
     cx_t* aa_P;
     cx_t* uu_P;
     cx_t* vv_P;
     cx_t* work_P;
 
-    
+
     //+++++++++++++++++++++++++++++
         INT32S  scale2;
         float scale;
         float norm;
-        
+
       int	pwidth;
 	  int	pheight;
-	  
+
 	  int sgn=0;
-	  
+
 	  float th;
 
-  
+
       INT32S xv;
       INT32S yv;
       INT32S angv;
@@ -123,7 +126,7 @@ int Krn_Compute2x2SVDCxMatrix(dsp_cxMatrix_t *mat_P, doubleVector_t *ss_P,dsp_cx
      INT32S phi_plus_psi;
      INT32S phi_minus_psi;
 
-     INT32S a11,a12,a21,a22;  
+     INT32S a11,a12,a21,a22;
      INT32S c11,c12,c21,c22;
 
      INT32S ar11,ar12,ar21,ar22;
@@ -145,37 +148,37 @@ int Krn_Compute2x2SVDCxMatrix(dsp_cxMatrix_t *mat_P, doubleVector_t *ss_P,dsp_cx
 
      INT32S v2r11,v2r12,v2r21,v2r22;
      INT32S v2i11,v2i12,v2i21,v2i22;
-     
+
      INT32S vr11,vr12,vr21,vr22;
      INT32S vi11,vi12,vi21,vi22;
-     
+
      INT32S ur11,ur12,ur21,ur22;
      INT32S ui11,ui12,ui21,ui22;
-     
-     
-     
+
+
+
     //+++++++++++++++++++++++++++++
-    
-    
-    
+
+
+
     char *fileName="cxsvdresults.dat";
     FILE *fp;
-    
+
     img.width=mat_P->width;
     img.height=mat_P->height;
     img.matrix_PP=mat_P->matrix_PP;
-   
+
       /*
         * allocate space for arrays
         */
 
-       if(img.width > img.height) 
+       if(img.width > img.height)
                len=img.height;
-           else 
+           else
                len=img.width;
 
 //++++++++++++++++++++++++++++++++++++++++++
-        
+
 
 
         pwidth=2;
@@ -183,11 +186,11 @@ int Krn_Compute2x2SVDCxMatrix(dsp_cxMatrix_t *mat_P, doubleVector_t *ss_P,dsp_cx
 
 
     //    scale=1024;
-    
+
     scale=4096;
-    
+
         scale2=(INT32S)scale;
-  #ifdef TEST      
+  #ifdef TEST
        mat_P->matrix_PP[0][0].re=9;
         mat_P->matrix_PP[0][0].im=5;
         mat_P->matrix_PP[0][1].re=3;
@@ -197,8 +200,8 @@ int Krn_Compute2x2SVDCxMatrix(dsp_cxMatrix_t *mat_P, doubleVector_t *ss_P,dsp_cx
         mat_P->matrix_PP[1][0].re=6;
         mat_P->matrix_PP[1][0].im=-7;
 #endif
-        
-    
+
+
         ar11=(INT32S)(mat_P->matrix_PP[0][0].re*scale);
         ai11=(INT32S)(mat_P->matrix_PP[0][0].im*scale);
         ar12=(INT32S)(mat_P->matrix_PP[0][1].re*scale);
@@ -209,7 +212,7 @@ int Krn_Compute2x2SVDCxMatrix(dsp_cxMatrix_t *mat_P, doubleVector_t *ss_P,dsp_cx
         ai21=(INT32S)(mat_P->matrix_PP[1][0].im*scale);
 
 
-     
+
 
 
 
@@ -234,7 +237,7 @@ int Krn_Compute2x2SVDCxMatrix(dsp_cxMatrix_t *mat_P, doubleVector_t *ss_P,dsp_cx
 
              for(j=0; j< pwidth; j++) {
 
-                   
+
                   xv=(INT32S )(mat_P->matrix_PP[i][j].re*scale);
                   yv=(INT32S )(mat_P->matrix_PP[i][j].im*scale);
 
@@ -242,12 +245,12 @@ int Krn_Compute2x2SVDCxMatrix(dsp_cxMatrix_t *mat_P, doubleVector_t *ss_P,dsp_cx
 
 
                   angv=CordicArctan(xv,yv,&rv);
-                  
+
                   printf("xv=%d yv=%d angv=%d rv=%d \n",xv,yv,angv,rv);
 
                   mat_P->matrix_PP[i][j].re=(float)rv;
                   mat_P->matrix_PP[i][j].im=(float)angv;
-                 
+
 
                   printf("%f,%f  ",mat_P->matrix_PP[i][j].re ,mat_P->matrix_PP[i][j].im );
 
@@ -262,9 +265,9 @@ int Krn_Compute2x2SVDCxMatrix(dsp_cxMatrix_t *mat_P, doubleVector_t *ss_P,dsp_cx
         }
         printf("\nPolar Coordinates Again\n");
         PrintCxMatrix(mat_P);
-        
-        
-        
+
+
+
          /*
           * compute U1 and V1 elements
           * for U1 phi=0.
@@ -284,12 +287,12 @@ int Krn_Compute2x2SVDCxMatrix(dsp_cxMatrix_t *mat_P, doubleVector_t *ss_P,dsp_cx
 
         printf("alpha=%f, beta=%f, eta=%f, omega=%f, phi=%f, psi=%f \n",
                  (float)alpha/(float)PI_1*PI,(float)beta/(float)PI_1*PI,eta/(float)PI_1*PI,(float)omega/(float)PI_1*PI,(float)phi/(float)PI_1*PI, (float)psi/(float)PI_1*PI);
- 
- 
+
+
          printf("alpha=%d, beta=%d, eta=%d, omega=%d, phi=%d, psi=%d \n",
                  alpha,beta,eta,omega,phi, psi);
 
-        
+
         /*
          * compute Exp(j*alpha)
          */
@@ -322,10 +325,10 @@ int Krn_Compute2x2SVDCxMatrix(dsp_cxMatrix_t *mat_P, doubleVector_t *ss_P,dsp_cx
        /*
         * compute U1
         */
-       u1r11= cos_alpha; 
+       u1r11= cos_alpha;
        u1i11= sin_alpha;
 
-       u1r22= cos_beta; 
+       u1r22= cos_beta;
        u1i22= sin_beta;
 
        u1r21=0;
@@ -337,10 +340,10 @@ int Krn_Compute2x2SVDCxMatrix(dsp_cxMatrix_t *mat_P, doubleVector_t *ss_P,dsp_cx
        /*
         * compute V1
         */
-       v1r11= cos_eta*cos_psi/scale2; 
+       v1r11= cos_eta*cos_psi/scale2;
        v1i11= sin_eta*cos_psi/scale2;
 
-       v1r12= sin_psi*cos_eta/scale2; 
+       v1r12= sin_psi*cos_eta/scale2;
        v1i12= sin_psi*sin_eta/scale2;
 
        v1r21= -sin_psi*cos_omega/scale2;
@@ -382,7 +385,7 @@ int Krn_Compute2x2SVDCxMatrix(dsp_cxMatrix_t *mat_P, doubleVector_t *ss_P,dsp_cx
 
 
 
-    //+++++++++++++++     U2 and V2 ++++++++++++++++++++++++++++++++++++++++++++++++++  
+    //+++++++++++++++     U2 and V2 ++++++++++++++++++++++++++++++++++++++++++++++++++
        /*
         * convert A into polar coordinates
         */
@@ -390,21 +393,21 @@ int Krn_Compute2x2SVDCxMatrix(dsp_cxMatrix_t *mat_P, doubleVector_t *ss_P,dsp_cx
         /*
          * convert complex matrix elements into polar coordinates
          */
-        mat_P->matrix_PP[0][0].re=(float)ar11; 
-        mat_P->matrix_PP[0][0].im=(float)ai11; 
-        mat_P->matrix_PP[0][1].re=(float)ar12; 
+        mat_P->matrix_PP[0][0].re=(float)ar11;
+        mat_P->matrix_PP[0][0].im=(float)ai11;
+        mat_P->matrix_PP[0][1].re=(float)ar12;
         mat_P->matrix_PP[0][1].im=(float)ai12;
-        mat_P->matrix_PP[1][0].re=(float)ar21; 
-        mat_P->matrix_PP[1][0].im=(float)ai21; 
-        mat_P->matrix_PP[1][1].re=(float)ar22; 
+        mat_P->matrix_PP[1][0].re=(float)ar21;
+        mat_P->matrix_PP[1][0].im=(float)ai21;
+        mat_P->matrix_PP[1][1].re=(float)ar22;
         mat_P->matrix_PP[1][1].im=(float)ai22;
-  
-  
+
+
         for(i=0; i< pheight; i++) {
 
              for(j=0; j< pwidth; j++) {
 
-                   
+
                   xv=(INT32S )mat_P->matrix_PP[i][j].re;
                   yv=(INT32S )mat_P->matrix_PP[i][j].im;
 
@@ -412,11 +415,11 @@ int Krn_Compute2x2SVDCxMatrix(dsp_cxMatrix_t *mat_P, doubleVector_t *ss_P,dsp_cx
 
                   mat_P->matrix_PP[i][j].re=rv;
                   mat_P->matrix_PP[i][j].im=angv;
-                 
+
 
        //           printf("%f,%f  ",mat_P->matrix_PP[i][j].re/(scale*4.0),mat_P->matrix_PP[i][j].im/(float)PI_1*PI);
                   printf("%f,%f  ",mat_P->matrix_PP[i][j].re,mat_P->matrix_PP[i][j].im);
-                  
+
 
 
 
@@ -427,11 +430,11 @@ int Krn_Compute2x2SVDCxMatrix(dsp_cxMatrix_t *mat_P, doubleVector_t *ss_P,dsp_cx
         }
 
 
- 
+
         /*
          * compute U2 and V2 elements
          */
-        
+
         alpha = -((INT32S)mat_P->matrix_PP[0][0].im+(INT32S)mat_P->matrix_PP[0][1].im)/2;
         eta   =  ((INT32S)mat_P->matrix_PP[0][1].im-(INT32S)mat_P->matrix_PP[0][0].im)/2;
         omega = -eta;
@@ -445,15 +448,15 @@ int Krn_Compute2x2SVDCxMatrix(dsp_cxMatrix_t *mat_P, doubleVector_t *ss_P,dsp_cx
         yv=((INT32S)mat_P->matrix_PP[0][1].re)/16;
         phi_minus_psi= CordicArctan(xv,yv,&rv);
 
-        printf("phi_plus_psi=%f  phi_minus_psi=%f \n",(float)phi_plus_psi/(float)PI_1*PI,(float)phi_minus_psi/(float)PI_1*PI); 
- 
+        printf("phi_plus_psi=%f  phi_minus_psi=%f \n",(float)phi_plus_psi/(float)PI_1*PI,(float)phi_minus_psi/(float)PI_1*PI);
+
         phi= (phi_plus_psi+ phi_minus_psi)/2;
         psi= (phi_plus_psi- phi_minus_psi)/2;
 
-  
+
         printf("alpha=%f, beta=%f, eta=%f, omega=%f, phi=%f, psi=%f \n",
                  (float)alpha/(float)PI_1*PI,(float)beta/(float)PI_1*PI,eta/(float)PI_1*PI,(float)omega/(float)PI_1*PI,(float)phi/(float)PI_1*PI, (float)psi/(float)PI_1*PI);
-        
+
         /*
          * compute Exp(j*alpha)
          */
@@ -463,7 +466,7 @@ int Krn_Compute2x2SVDCxMatrix(dsp_cxMatrix_t *mat_P, doubleVector_t *ss_P,dsp_cx
        cos_alpha=xv;
        sin_alpha=yv;
 
-      
+
        xv=scale;
        yv=0;
        CordicRotate(&xv,&yv, eta);
@@ -495,7 +498,7 @@ int Krn_Compute2x2SVDCxMatrix(dsp_cxMatrix_t *mat_P, doubleVector_t *ss_P,dsp_cx
        /*
         * compute U2
         */
-       u2r11= cos_phi*cos_alpha/scale2; 
+       u2r11= cos_phi*cos_alpha/scale2;
        u2i11= cos_phi*sin_alpha/scale2;
 
        u2r12=sin_phi*cos_beta/scale2;
@@ -510,10 +513,10 @@ int Krn_Compute2x2SVDCxMatrix(dsp_cxMatrix_t *mat_P, doubleVector_t *ss_P,dsp_cx
        /*
         * compute V2
         */
-       v2r11= cos_eta*cos_psi/scale2; 
+       v2r11= cos_eta*cos_psi/scale2;
        v2i11= sin_eta*cos_psi/scale2;
 
-       v2r12= sin_psi*cos_eta/scale2; 
+       v2r12= sin_psi*cos_eta/scale2;
        v2i12= sin_psi*sin_eta/scale2;
 
        v2r21= -sin_psi*cos_omega/scale2;
@@ -557,7 +560,7 @@ int Krn_Compute2x2SVDCxMatrix(dsp_cxMatrix_t *mat_P, doubleVector_t *ss_P,dsp_cx
        a21=ar21;
        a22=ar22;
 
-      
+
         xv=(a11-a22)/16;
         if(xv <0) { xv= -xv; sgn=-1;}
         yv=(2*a12)/16;
@@ -569,7 +572,7 @@ int Krn_Compute2x2SVDCxMatrix(dsp_cxMatrix_t *mat_P, doubleVector_t *ss_P,dsp_cx
         yv=0;
         CordicRotate(&xv,&yv, theta);
         cos_theta=xv;
-        sin_theta=yv;	
+        sin_theta=yv;
 
 
         printf("Theta=%f cos_theta=%d  sin_theta=%d \n",(float)theta/(float)PI_1*PI,xv,yv);
@@ -585,11 +588,11 @@ int Krn_Compute2x2SVDCxMatrix(dsp_cxMatrix_t *mat_P, doubleVector_t *ss_P,dsp_cx
 
         MultiplyMatrix(scale2,cos_theta,sin_theta,-sin_theta,cos_theta,
                               a11,a12,a21, a22,
-                              &c11,&c12,&c21,&c22); 
+                              &c11,&c12,&c21,&c22);
 
-        MultiplyMatrix(scale2, c11,c12,c21,c22,  
+        MultiplyMatrix(scale2, c11,c12,c21,c22,
                                cos_theta,-sin_theta,sin_theta,cos_theta,
-                               &a11,&a12,&a21, &a22 ); 
+                               &a11,&a12,&a21, &a22 );
 
         printf("Rr.A.Rl\n");
         printf ("%d\t%d\n%d\t%d\n",a11,a12,a21,a22);
@@ -614,7 +617,7 @@ int Krn_Compute2x2SVDCxMatrix(dsp_cxMatrix_t *mat_P, doubleVector_t *ss_P,dsp_cx
        MultiplyMatrixComplex(scale2,cr11,ci11,cr12,ci12,cr21,ci21,cr22,ci22,
                                  cos_theta,0,-sin_theta,0,sin_theta,0,cos_theta,0,
                                         &vr11,&vi11,&vr12,&vi12,&vr21,&vi21,&vr22,&vi22);
-        
+
 
 
         if(1) {
@@ -637,12 +640,12 @@ int Krn_Compute2x2SVDCxMatrix(dsp_cxMatrix_t *mat_P, doubleVector_t *ss_P,dsp_cx
         v_P->matrix_PP[1][1].im=(float)vi22;
         v_P->matrix_PP[1][0].re=(float)vr21;
         v_P->matrix_PP[1][0].im=(float)vi21;
-        
+
         ss_P->vector_P[0]=(float)a11/scale;
         ss_P->vector_P[1]=(float)a22/scale;
-        
+
         } else {
-        
+
         u_P->matrix_PP[0][0].re=(float)ur12;
         u_P->matrix_PP[0][0].im=(float)ui12;
         u_P->matrix_PP[0][1].re=(float)ur11;
@@ -661,43 +664,43 @@ int Krn_Compute2x2SVDCxMatrix(dsp_cxMatrix_t *mat_P, doubleVector_t *ss_P,dsp_cx
         v_P->matrix_PP[1][1].im=(float)vi21;
         v_P->matrix_PP[1][0].re=(float)vr22;
         v_P->matrix_PP[1][0].im=(float)vi22;
-        
+
         ss_P->vector_P[0]=(float)a22/scale;
-        ss_P->vector_P[1]=(float)a11/scale;      
-        
-        
-        
-        
-        
+        ss_P->vector_P[1]=(float)a11/scale;
+
+
+
+
+
         }
-        
+
         norm=1/(scale);
         for(i=0; i<2; i++)
            for(j=0; j<2; j++) {
                    v_P->matrix_PP[i][j].re=v_P->matrix_PP[i][j].re*norm;
                    v_P->matrix_PP[i][j].im=v_P->matrix_PP[i][j].im*norm;
-                   
-                   
+
+
                    u_P->matrix_PP[i][j].re=u_P->matrix_PP[i][j].re*norm;
                    u_P->matrix_PP[i][j].im=u_P->matrix_PP[i][j].im*norm;
 
-           
+
         }
-        
-       
-        
+
+
+
         printf("SVD FXP  %f    %f\n\n", ss_P->vector_P[0], ss_P->vector_P[1]);
-        
+
         printf("SVD FXP U\n");
         PrintCxMatrix(u_P);
-        
+
         printf("SVD FXP V\n");
         PrintCxMatrix(v_P);
-        
-        
+
+
   //      Krn_TransposeConjugateMatrix(v_P) ;
 //+++++++++++++++++++++++++++++++++++++++++++
-        
+
 
 
 

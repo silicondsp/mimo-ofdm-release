@@ -1,7 +1,6 @@
 
-/*  Capsim (r) Text Mode Kernel (TMK) Blocks Library 
-    Copyright (C) 2007-2017   Silicon DSP  Corporation
-
+/*  Capsim (r) Text Mode Kernel (TMK) Blocks Library
+    Copyright (C) 2007-2017   Sasan Ardalan
     This library is free software; you can redistribute it and/or
     modify it under the terms of the GNU Lesser General Public
     License as published by the Free Software Foundation; either
@@ -22,6 +21,8 @@
 //
 // Author: Sasan Ardalan
 // Date: 2007
+// GitHub Repository https://github.com/silicondsp/mimo-ofdm-release
+// https://github.com/silicondsp/mimo-ofdm-release/blob/main/Article/MIMO-OFDM_SVD_Computation_CORDIC_Operations.pdf
 //
 
 #include <stdio.h>
@@ -37,15 +38,15 @@
 #define PI 3.1415926535898
 
 
-extern void PrintCxMatrix(dsp_cxMatrix_t *mat_P); 
+extern void PrintCxMatrix(dsp_cxMatrix_t *mat_P);
 
 int Krn_Compute2x2SVDCxMatrixFP(dsp_cxMatrix_t *mat_P, doubleVector_t *ss_P,dsp_cxMatrix_t *u_P, dsp_cxMatrix_t *v_P){
 
   	      int len;
-   	
+
    	int M ;
     int N ;
-    
+
 
     int INFO;
 
@@ -60,10 +61,10 @@ int Krn_Compute2x2SVDCxMatrixFP(dsp_cxMatrix_t *mat_P, doubleVector_t *ss_P,dsp_
 	float	fpixel;
 
         float x,y;
-        
+
         float norm;
-	
-	
+
+
 
     float tr;
     float ti;
@@ -106,7 +107,7 @@ int Krn_Compute2x2SVDCxMatrixFP(dsp_cxMatrix_t *mat_P, doubleVector_t *ss_P,dsp_
      float phi_plus_psi;
      float phi_minus_psi;
 
-     float a11,a12,a21,a22;  
+     float a11,a12,a21,a22;
      float c11,c12,c21,c22;
 
      float ar11,ar12,ar21,ar22;
@@ -138,18 +139,18 @@ int Krn_Compute2x2SVDCxMatrixFP(dsp_cxMatrix_t *mat_P, doubleVector_t *ss_P,dsp_
      float vr11,vr12,vr21,vr22;
      float vi11,vi12,vi21,vi22;
 
-     
+
 
      int sgn=0;
 
      double th;
-     
+
      int numberRowsRead;
-     
+
      float scale;
-    
+
     //++++++++++++++++++++++++++++
-        
+
 
 
         pwidth=2;
@@ -157,11 +158,11 @@ int Krn_Compute2x2SVDCxMatrixFP(dsp_cxMatrix_t *mat_P, doubleVector_t *ss_P,dsp_
 
 
     //    scale=1024;
-    
+
     scale=1.0;
-    
+
         scale2=scale;
-  #ifdef TEST      
+  #ifdef TEST
        mat_P->matrix_PP[0][0].re=9;
         mat_P->matrix_PP[0][0].im=5;
         mat_P->matrix_PP[0][1].re=3;
@@ -171,8 +172,8 @@ int Krn_Compute2x2SVDCxMatrixFP(dsp_cxMatrix_t *mat_P, doubleVector_t *ss_P,dsp_
         mat_P->matrix_PP[1][0].re=6;
         mat_P->matrix_PP[1][0].im=-7;
 #endif
-        
-    
+
+
         ar11=mat_P->matrix_PP[0][0].re*scale;
         ai11=mat_P->matrix_PP[0][0].im*scale;
         ar12=mat_P->matrix_PP[0][1].re*scale;
@@ -191,7 +192,7 @@ int Krn_Compute2x2SVDCxMatrixFP(dsp_cxMatrix_t *mat_P, doubleVector_t *ss_P,dsp_
 
              for(j=0; j< pwidth; j++) {
 
-                   
+
                   xv=(float )mat_P->matrix_PP[i][j].re*scale;
                   yv=(float )mat_P->matrix_PP[i][j].im*scale;
 
@@ -201,7 +202,7 @@ int Krn_Compute2x2SVDCxMatrixFP(dsp_cxMatrix_t *mat_P, doubleVector_t *ss_P,dsp_
 
                   mat_P->matrix_PP[i][j].re=rv;
                   mat_P->matrix_PP[i][j].im=angv;
-                 
+
 
                   printf("%f,%f  ",mat_P->matrix_PP[i][j].re/(scale*4.0),mat_P->matrix_PP[i][j].im);
 
@@ -240,7 +241,7 @@ int Krn_Compute2x2SVDCxMatrixFP(dsp_cxMatrix_t *mat_P, doubleVector_t *ss_P,dsp_
 
         printf("alpha=%f, beta=%f, eta=%f, omega=%f, phi=%f, psi=%f \n",
                  (float)alpha,(float)beta,eta,(float)omega,(float)phi, (float)psi);
-        
+
         /*
          * compute Exp(j*alpha)
          */
@@ -281,10 +282,10 @@ int Krn_Compute2x2SVDCxMatrixFP(dsp_cxMatrix_t *mat_P, doubleVector_t *ss_P,dsp_
        /*
         * compute U1
         */
-       u1r11= cos_alpha; 
+       u1r11= cos_alpha;
        u1i11= sin_alpha;
 
-       u1r22= cos_beta; 
+       u1r22= cos_beta;
        u1i22= sin_beta;
 
        u1r21=0;
@@ -296,10 +297,10 @@ int Krn_Compute2x2SVDCxMatrixFP(dsp_cxMatrix_t *mat_P, doubleVector_t *ss_P,dsp_
        /*
         * compute V1
         */
-       v1r11= cos_eta*cos_psi/scale2; 
+       v1r11= cos_eta*cos_psi/scale2;
        v1i11= sin_eta*cos_psi/scale2;
 
-       v1r12= sin_psi*cos_eta/scale2; 
+       v1r12= sin_psi*cos_eta/scale2;
        v1i12= sin_psi*sin_eta/scale2;
 
        v1r21= -sin_psi*cos_omega/scale2;
@@ -341,7 +342,7 @@ int Krn_Compute2x2SVDCxMatrixFP(dsp_cxMatrix_t *mat_P, doubleVector_t *ss_P,dsp_
 
 
 
-    //+++++++++++++++     U2 and V2 ++++++++++++++++++++++++++++++++++++++++++++++++++  
+    //+++++++++++++++     U2 and V2 ++++++++++++++++++++++++++++++++++++++++++++++++++
        /*
         * convert A into polar coordinates
         */
@@ -349,19 +350,19 @@ int Krn_Compute2x2SVDCxMatrixFP(dsp_cxMatrix_t *mat_P, doubleVector_t *ss_P,dsp_
         /*
          * convert complex matrix elements into polar coordinates
          */
-        mat_P->matrix_PP[0][0].re=(float)ar11; 
-        mat_P->matrix_PP[0][0].im=(float)ai11; 
-        mat_P->matrix_PP[0][1].re=(float)ar12; 
+        mat_P->matrix_PP[0][0].re=(float)ar11;
+        mat_P->matrix_PP[0][0].im=(float)ai11;
+        mat_P->matrix_PP[0][1].re=(float)ar12;
         mat_P->matrix_PP[0][1].im=(float)ai12;
-        mat_P->matrix_PP[1][0].re=(float)ar21; 
-        mat_P->matrix_PP[1][0].im=(float)ai21; 
+        mat_P->matrix_PP[1][0].re=(float)ar21;
+        mat_P->matrix_PP[1][0].im=(float)ai21;
         mat_P->matrix_PP[1][1].re=(float)ar22;
         mat_P->matrix_PP[1][1].im=(float)ai22;
         for(i=0; i< pheight; i++) {
 
              for(j=0; j< pwidth; j++) {
 
-                   
+
                   xv=(float )mat_P->matrix_PP[i][j].re;
                   yv=(float )mat_P->matrix_PP[i][j].im;
 
@@ -371,7 +372,7 @@ int Krn_Compute2x2SVDCxMatrixFP(dsp_cxMatrix_t *mat_P, doubleVector_t *ss_P,dsp_
 
                   mat_P->matrix_PP[i][j].re=rv;
                   mat_P->matrix_PP[i][j].im=angv;
-                 
+
 
                   printf("%f,%f  ",mat_P->matrix_PP[i][j].re/(scale*4.0),mat_P->matrix_PP[i][j].im/(float)PI_1*PI);
 
@@ -385,11 +386,11 @@ int Krn_Compute2x2SVDCxMatrixFP(dsp_cxMatrix_t *mat_P, doubleVector_t *ss_P,dsp_
         }
 
 
- 
+
         /*
          * compute U2 and V2 elements
          */
-        
+
         alpha = -((float)mat_P->matrix_PP[0][0].im+(float)mat_P->matrix_PP[0][1].im)/2;
         eta   =  ((float)mat_P->matrix_PP[0][1].im-(float)mat_P->matrix_PP[0][0].im)/2;
         omega = -eta;
@@ -407,15 +408,15 @@ int Krn_Compute2x2SVDCxMatrixFP(dsp_cxMatrix_t *mat_P, doubleVector_t *ss_P,dsp_
         phi_minus_psi = atan2(yv,xv);
         rv=sqrt(xv*xv+yv*yv);
 
-        printf("phi_plus_psi=%f  phi_minus_psi=%f \n",(float)phi_plus_psi,(float)phi_minus_psi); 
- 
+        printf("phi_plus_psi=%f  phi_minus_psi=%f \n",(float)phi_plus_psi,(float)phi_minus_psi);
+
         phi= (phi_plus_psi+ phi_minus_psi)/2;
         psi= (phi_plus_psi- phi_minus_psi)/2;
 
-  
+
         printf("alpha=%f, beta=%f, eta=%f, omega=%f, phi=%f, psi=%f \n",
                  (float)alpha,(float)beta,eta,(float)omega,(float)phi, (float)psi);
-        
+
         /*
          * compute Exp(j*alpha)
          */
@@ -427,7 +428,7 @@ int Krn_Compute2x2SVDCxMatrixFP(dsp_cxMatrix_t *mat_P, doubleVector_t *ss_P,dsp_
        cos_alpha=xv;
        sin_alpha=yv;
 
-      
+
        xv=scale;
        yv=0;
        //FXP CordicRotate(&xv,&yv, eta);
@@ -465,7 +466,7 @@ int Krn_Compute2x2SVDCxMatrixFP(dsp_cxMatrix_t *mat_P, doubleVector_t *ss_P,dsp_
        /*
         * compute U2
         */
-       u2r11= cos_phi*cos_alpha/scale2; 
+       u2r11= cos_phi*cos_alpha/scale2;
        u2i11= cos_phi*sin_alpha/scale2;
 
        u2r12=sin_phi*cos_beta/scale2;
@@ -480,10 +481,10 @@ int Krn_Compute2x2SVDCxMatrixFP(dsp_cxMatrix_t *mat_P, doubleVector_t *ss_P,dsp_
        /*
         * compute V2
         */
-       v2r11= cos_eta*cos_psi/scale2; 
+       v2r11= cos_eta*cos_psi/scale2;
        v2i11= sin_eta*cos_psi/scale2;
 
-       v2r12= sin_psi*cos_eta/scale2; 
+       v2r12= sin_psi*cos_eta/scale2;
        v2i12= sin_psi*sin_eta/scale2;
 
        v2r21= -sin_psi*cos_omega/scale2;
@@ -527,7 +528,7 @@ int Krn_Compute2x2SVDCxMatrixFP(dsp_cxMatrix_t *mat_P, doubleVector_t *ss_P,dsp_
        a21=ar21;
        a22=ar22;
 
-      
+
         xv=(a11-a22)/16.0;
         if(xv <0) { xv= -xv; sgn=-1;}
         yv=(2*a12)/16.0;
@@ -559,11 +560,11 @@ int Krn_Compute2x2SVDCxMatrixFP(dsp_cxMatrix_t *mat_P, doubleVector_t *ss_P,dsp_
 
         MultiplyMatrixFP(scale2,cos_theta,sin_theta,-sin_theta,cos_theta,
                               a11,a12,a21, a22,
-                              &c11,&c12,&c21,&c22); 
+                              &c11,&c12,&c21,&c22);
 
-        MultiplyMatrixFP(scale2, c11,c12,c21,c22,  
+        MultiplyMatrixFP(scale2, c11,c12,c21,c22,
                                cos_theta,-sin_theta,sin_theta,cos_theta,
-                               &a11,&a12,&a21, &a22 ); 
+                               &a11,&a12,&a21, &a22 );
 
         printf("Rr.A.Rl\n");
         printf ("%f\t%f\n%f\t%f\n",a11,a12,a21,a22);
@@ -590,10 +591,10 @@ int Krn_Compute2x2SVDCxMatrixFP(dsp_cxMatrix_t *mat_P, doubleVector_t *ss_P,dsp_
        MultiplyMatrixComplexFP(scale2,cr11,ci11,cr12,ci12,cr21,ci21,cr22,ci22,
                                  cos_theta,0,-sin_theta,0,sin_theta,0,cos_theta,0,
                                         &vr11,&vi11,&vr12,&vi12,&vr21,&vi21,&vr22,&vi22);
-#endif    
+#endif
 
 
-	
+
        printf("U Matrix\n");
        PrintMatrixComplexFP(ur11,ui11,ur12,ui12,ur21,ui21,ur22,ui22);
        printf("\n\n");
@@ -605,16 +606,16 @@ int Krn_Compute2x2SVDCxMatrixFP(dsp_cxMatrix_t *mat_P, doubleVector_t *ss_P,dsp_
 #if 000
       tr=vr12;
       ti=vi12;
-      
+
       vr12=vr21;
       vi12=-vi21;
-      
+
       vr21=tr;
       vi21=-ti;
-      
+
       vi11=-vi11;
       vi22=-vi22;
-#endif    
+#endif
 
       MultiplyMatrixComplexFP(scale2,ur11,ui11,ur12,ui12,ur21,ui21,ur22,ui22,
                     a11,0,0,0,0,0,a22,0,
@@ -623,14 +624,14 @@ int Krn_Compute2x2SVDCxMatrixFP(dsp_cxMatrix_t *mat_P, doubleVector_t *ss_P,dsp_
        MultiplyMatrixComplexFP(scale2,cr11,ci11,cr12,ci12,cr21,ci21,cr22,ci22,
                                  vr11,vi11,vr12,vi12,vr21,vi21,vr22,vi22,
                                         &cr11,&ci11,&cr12,&ci12,&cr21,&ci21,&cr22,&ci22);
-                                        
-                                        
-                                        
+
+
+
      printf("U S VH Matrix\n");
        PrintMatrixComplexFP(cr11,ci11,cr12,ci12,cr21,ci21,cr22,ci22);
        printf("\n\n");
 
-     
+
 
 
 
@@ -656,12 +657,12 @@ if(1) {
         v_P->matrix_PP[1][1].im=(float)vi22;
         v_P->matrix_PP[1][0].re=(float)vr21;
         v_P->matrix_PP[1][0].im=(float)vi21;
-        
+
         ss_P->vector_P[0]=(float)a11/scale;
         ss_P->vector_P[1]=(float)a22/scale;
-        
+
         } else {
-        
+
         u_P->matrix_PP[0][0].re=(float)ur12;
         u_P->matrix_PP[0][0].im=(float)ui12;
         u_P->matrix_PP[0][1].re=(float)ur11;
@@ -680,43 +681,43 @@ if(1) {
         v_P->matrix_PP[1][1].im=(float)vi21;
         v_P->matrix_PP[1][0].re=(float)vr22;
         v_P->matrix_PP[1][0].im=(float)vi22;
-        
+
         ss_P->vector_P[0]=(float)a22/scale;
-        ss_P->vector_P[1]=(float)a11/scale;      
-        
-        
-        
-        
-        
+        ss_P->vector_P[1]=(float)a11/scale;
+
+
+
+
+
         }
-        
+
         norm=1/(scale);
         for(i=0; i<2; i++)
            for(j=0; j<2; j++) {
                    v_P->matrix_PP[i][j].re=v_P->matrix_PP[i][j].re*norm;
                    v_P->matrix_PP[i][j].im=v_P->matrix_PP[i][j].im*norm;
-                   
-                   
+
+
                    u_P->matrix_PP[i][j].re=u_P->matrix_PP[i][j].re*norm;
                    u_P->matrix_PP[i][j].im=u_P->matrix_PP[i][j].im*norm;
 
-           
+
         }
-        
-       
-        
+
+
+
         printf("SVD FXP  %f    %f\n\n", ss_P->vector_P[0], ss_P->vector_P[1]);
-        
+
         printf("SVD FXP U\n");
         PrintCxMatrix(u_P);
-        
+
         printf("SVD FXP V\n");
         PrintCxMatrix(v_P);
-        
-        
+
+
   //      Krn_TransposeConjugateMatrix(v_P) ;
 //+++++++++++++++++++++++++++++++++++++++++++
-        
+
 
 
 
