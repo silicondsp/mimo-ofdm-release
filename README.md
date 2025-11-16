@@ -563,7 +563,7 @@ See the Block Diagram of a full system <a href="#mimo-ofdm">here</a>.
             <td>stmat4x2.c </td>
             <td>Convert Four streams to two streams based on transpose of 2x4  using orthogonal steering matrix </td>
             <td>Ardalan</td>
-            <td>2002</td>
+            <td>2007</td>
         </tr>
         <tr>
             <td>14</td>
@@ -595,7 +595,7 @@ See the Block Diagram of a full system <a href="#mimo-ofdm">here</a>.
         <tr>
             <td>2</td>
             <td>Krn_Compute2x2SVDCxMatrixFP.c </td>
-            <td>Compute SVD 2x2 Complex Matrix CORDIC Floting Point</td>
+            <td>Compute SVD 2x2 Complex Matrix CORDIC Floating Point</td>
             <td>Adalang</td>
             <td>2007</td>
         </tr>
@@ -622,8 +622,8 @@ See the Block Diagram of a full system <a href="#mimo-ofdm">here</a>.
         </tr>
         <tr>
             <td>6</td>
-            <td>krn_lapack.cc</td>
-            <td>API for Lapack (via CLAPACK) for Eigenvaluue/SVD/Inverse .Complex and Real..</td>
+            <td>krn_lapack.c</td>
+            <td>API for Lapack (via CLAPACK) for Eigenvaluue/SVD/Inverse, Complex and Real.</td>
             <td>Ardalan</td>
             <td>2007</td>
         </tr>
