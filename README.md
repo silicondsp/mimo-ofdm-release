@@ -40,8 +40,8 @@ Icons <img src="images/noun-links-821764.png" width="30" height="30" alt="link g
   <td style="border-width : 0px;">2</td>
   <td style="border-width : 0px;"><p align="center"><strong>Computing the  Singular Value Decomposition (SVD) with Fixed Point CORDIC Operations</strong></p>
     <p align="center">Application to MIMO-OFDM<strong></strong></p></td>
-  <td style="border-width : 0px;"><a href="Article/MIMO-OFDM_SVD_Computation_CORDIC_Operations.pdf"><img src="images/pdf.gif" width="22" height="21" alt=""/></a></td>
-  <td style="border-width : 0px;">Article/Paper</td>
+  <td style="border-width : 0px;"><a href="Paper/MIMO-OFDM_SVD_CORDIC_Operations.pdf"><img src="images/pdf.gif" width="22" height="21" alt=""/></a></td>
+  <td style="border-width : 0px;">Paper and Latex File</td>
 </tr>
 <tr valign="top">
 <td width="40" style="border-width : 0px;"><p style=" text-align: left; text-indent: 0px; padding: 0px 0px 0px 0px; margin: 0px 0px 0px 0px;"><span style="font-size: 10pt; font-family: 'Arial', 'Helvetica', sans-serif; font-style: normal; font-weight: normal; color: #000000; background-color: transparent; text-decoration: none;">3</span></p>
