@@ -75,7 +75,7 @@
 
 % Define the title, author and date of the document.
 % If the date is undefined, the current date is substituted.
-\title {Computing the Singular Value Decomposition (SVD) with Fixed Point CORDIC Operations With  Application to MIMO-OFDM }
+\title {Computing the Singular Value Decomposition (SVD) with Fixed Point CORDIC Operations with  Application to MIMO-OFDM }
 \author{Sasan Ardalan Extra Class Amateur Radio, Ph.D.}
 \date{}
 
@@ -86,7 +86,7 @@
 % Generates a title based on the \title, \author, and \date commands in the preamble.
 \thispagestyle{empty}
 \begin{abstract}
-In this paper, the computation of the Singular Value Decomposition (SVD) of complex matrices will be presented. The application of CORDIC operations for fixed point implementations of the SVD of complex matrices will be introduced. SVD plays a major role in Closed Loop MIMO OFDM systems. The impact of fixed point implementation of SVD in a Closed Loop MIMO-OFDM system is examined. The  ratio of maximum to minimum Singular Value (MMSVR) is computed for  both fixed point (CORDIC) and floating point operations (using the LAPACK library). The fixed point implementation  closely tracks the floating point results.  It is shown that for highly ill-conditioned sub carriers the fixed point implementation deviates from the floating point MMSVR. This leads to noise enhancement and degradation of performance. By adding transmit  diversity in Closed Loop MIMO-OFDM the MMSVR can be reduced and performance substantially enhanced for the fixed point implementation. This paper is an important introduction to the algorithms implemented in the GitHub repository for MIMO-OFDM:
+In this paper, the computation of the Singular Value Decomposition (SVD) of complex matrices will be presented using fixed point arithmetic. The application of CORDIC operations for fixed point implementations of the SVD of complex matrices will be introduced. SVD plays a major role in Closed Loop MIMO OFDM systems. The impact of fixed point implementation of SVD in a Closed Loop MIMO-OFDM system is examined. The ratio of Maximum to Minimum Singular Value (MMSVR) is computed for both fixed point (CORDIC) and floating point operations (using the LAPACK library). The fixed point implementation closely tracks the floating point results over fading channel models. It is shown that for highly ill-conditioned sub carriers the fixed point implementation deviates from the floating point MMSVR. This leads to noise enhancement and degradation of performance. By adding transmit diversity in Closed Loop MIMO-OFDM the MMSVR can be reduced and performance substantially enhanced for the fixed point implementation. It is also shown how SVD can be used in Open Loop MIMO-OFDM systems. This paper is an important introduction to the algorithms implemented in the GitHub repository for MIMO-OFDM:
 https://github.com/silicondsp/mimo-ofdm-release
 \end{abstract}
 \paragraph{\copyright{Copyright  2006-2025  Silicon DSP$\textsuperscript{\textregistered}$ Corporation}}
@@ -96,16 +96,6 @@ Version 1.2 or any later version published by the Free Software
 Foundation; with no Invariant Sections, no Front-Cover Texts, and
 no Back-Cover Texts. A copy of the license is included in the
 section entitled "GNU Free Documentation License".
-\begin{figure}[hbtp]
-  \centering 
-    \includegraphics [width=0.5in, left]{./Figures/sd-logo-tm_sm.png}
-    \captionsetup{labelformat=empty} % Apply the empty format for this figure
-  \caption{}
-  \label{fig:sdsp}
-\end{figure}
-
-\newpage
-\paragraph{Sasan Ardalan} received his Diploma from Alborz, Tehran, Iran. He received his Ph.D. from North Carolina State University in Electrical Engineering  in 1983. He was an Associate Professor at NC State in 1991. He was an Adjunct Professor at Duke University.  He has published many articles in  refereed journals in electronics. He has 12 issued US patents.
 
 \newpage
 \tableofcontents
@@ -192,7 +182,7 @@ The superior performance of the 4x2 Closed Loop SVD MIMO OFDM over the 2x2 OpenL
 \end{figure}
 
 
-\chapter{2	Brief Overview of MIMO OFDM Communication Receiver}
+\chapter{Brief Overview of MIMO OFDM Communication Receiver}
 \paragraph{}
 A MIMO communication channel is shown in Figure \ref{fig:mimo-channel}. The Figure shows the complex frequency response for a single carrier in a MIMO OFDM system from each transmit antenna to each receive antenna.  The complex elements $h_{jk}$ (j=1, 2, 3) and (k=1, 2) form a complex matrix H. To implement a MIMO OFDM system, the receiver needs to estimate the channel per carrier in order to perform equalization and separate the multiplexed streams (or to generate a single stream in diversity schemes).  To do this, each transmitted packet contains high throughput training symbols. The receiver processes these training symbols and estimates the channel.  In an open loop zero forcing MIMO system, in order to separate and equalize the received channels, the Pseudo-inverse \cite{Weisstein} of the channel is computed for reach carrier’s H channel matrix.
 
@@ -222,6 +212,11 @@ Compute the SVD of $H$ and substitute for  $H$.
 \begin{equation} 
 H=U\Sigma V^{\dagger}
 \end{equation}
+Define,
+
+\begin{equation}
+Q=V\Sigma^{\dagger}
+\end{equation}
 
 \begin{equation} 
 W=(Q^{\dagger})^{-1}Q^{-1}QU^{\dagger}
@@ -240,9 +235,6 @@ W=H^{+}=(V\Sigma^{\dagger}\Sigma V^{\dagger})^{-1}V\Sigma^{\dagger}U^{\dagger}
 W=(V\Sigma^{\dagger}\Sigma V^{\dagger})^{-1}V \Sigma^{\dagger}  U^{\dagger}
 \end{equation}
 
-\begin{equation}
-Q=V\Sigma^{\dagger}
-\end{equation}
 
 
 
@@ -271,17 +263,14 @@ W=(\Sigma V^{\dagger})^{-1}U^{\dagger}=(V^{\dagger})^{-1}\Sigma^{-1}U^{\dagger}
 
 
 
-
+So we can express the Pseudoinverse $W$ as:
 
 \begin{equation}
 W=V\Sigma^{-1}U^{\dagger}
 \end{equation}
 
-So we can express the Pseudoinverse $W$ as:
-\begin{equation} 
-W=V\Sigma^{-1}U^{\dagger}
-\end{equation}
-So, using an SVD 2x2 kernel we can support both beamforming and open loop MIMO equalization.
+
+Therefore,, using an SVD 2x2 kernel we can perform  both beamforming and open loop MIMO equalization.
 
 For a 2x3 Open Loop MIMO we use $\Sigma^{+}$ instead of $\Sigma^{-}$. 
 
@@ -464,7 +453,7 @@ Define the Matrix $A$,
     =U \Sigma V^\dag
 \end{equation}
 
-We start out with the Matrix A and use Octave or Mathematica to compute the SVD:
+We start out with the Matrix A and use  Mathematica to compute the SVD:
 
 
 \begin{equation}\label{test}
@@ -770,7 +759,7 @@ V=V_1 \times V_2 \times
    \right)
 \end{equation}
 
-\chapter{Computing SVD of Rectangular Matrix with Square SVD Algorithms}
+\chapter{Computing the SVD of Rectangular Matrix with Square SVD Algorithms}
 
 
 \paragraph{}
@@ -891,18 +880,18 @@ we multiply
 
 
 
-\chapter{Comparison of the CORDIC based Fixed Point  with Floating Point Beamforming MIMO OFDM}
+\chapter{Comparison of the CORDIC Based Fixed Point  with Floating Point Beamforming MIMO OFDM}
 
 \section{Introduction}
-We have implemented the 2x2 SVD (Beamforming) MIMO OFDM System using the Fixed Point CORDIC based 2x2 SVD kernel. In this section we compare the fixed point SVD implementation with the floating point SVD based on the LAPACK\cite{lapack}   library. In the simulations the 2x2 Beamforming MIMO OFDM system shown in Figure \ref{fig:mimo-ofdm-2x2} (using Capsim® and IEEE 802.11a 54 Mbps streams) is used where the receiver is either based on the floating point LAPACK library, or the fixed point CORDIC based SVD. 
+We have implemented the 2x2 SVD (Beamforming) MIMO OFDM System using the Fixed Point CORDIC based 2x2 SVD kernel. In this section we compare the fixed point SVD implementation with the floating point SVD based on the LAPACK\cite{lapack}   library. In the simulations the 2x2 Beamforming MIMO OFDM system shown in Figure \ref{fig:mimo-ofdm-2x2} (using Capsim$\textsuperscript{\textregistered}$ and IEEE 802.11a 54 Mbps streams) is used where the receiver is either based on the floating point LAPACK library, or the fixed point CORDIC based SVD. 
 
-\section{Comparison between floating point and fixed point CORDIC  }
+\section{Comparison Between Floating Point and Fixed Point CORDIC  }
 The comparison between floating point and CORDIC fixed point is key to exploring the degradation introduced by the fixed point implementation of the 2x2 SVD and to demonstrate that the fixed point 2x2 SVD performs well over a wide range of MIMO channels.
  
 \begin{figure}[hbtp]
   \centering 
     \includegraphics [width=4in]{./Figures/svd-mimo-2x2.png}
-  \caption{Capsim® MIMO OFDM 2x2 Closed Loop with Channel Modeling and Noise Specification 
+  \caption{Capsim$\textsuperscript{\textregistered}$ MIMO OFDM 2x2 Closed Loop with Channel Modeling and Noise Specification 
 }
   \label{fig:mimo-ofdm-2x2}
 \end{figure}
@@ -917,7 +906,7 @@ A key comparison is the case where channel noise is added. In this case, we expe
 \begin{figure}[hbtp]
   \centering 
     \includegraphics [width=4in]{./Figures/svd_2x2_lapack.png}
-  \caption{2x2 Beam Forming MIMO OFDM 64 QAM Constellations for Each Stream LAPACK Floating Point Library, High SNR }
+  \caption{2x2 Beamforming MIMO OFDM 64 QAM Constellations for Each Stream LAPACK Floating Point Library, High SNR }
   \label{fig:svd-2x2-lapack-high-snr}
 \end{figure}
 
@@ -958,7 +947,7 @@ To show that the fixed point CORDIC 2x2 SVD tracks the floating point SVD in a 2
   \caption{Singular Value Ratio: Floating Point versus Fixed Point 2x2 Closed Loop for Each Carrier(52)}
   \label{fig:svd-radio-fxp-float}
 \end{figure}
-\section{On the perfrormance of Open Loop MIMO  Systems}
+\section{On the Performance of Open Loop MIMO  Systems}
 
 In \cite{Gao} the Maximium to Minimum Singular Value Ratio (MMSVR) is defined. It is shown that it is a key predictor of the performance of Open-Loop MIMO OFDM systems over many channel realizations. In Figure \ref{fig:mmsvr-probability-3x3-3x4}, it is shown that for 3x4 MIMO OFDM the probability of the MMSVR is shifted to the left (lower values, less ill conditioned situations) compared to the 3x3 Open Loop system. Track the peak value to see this result. Since we can implement an Open Loop MIMO system with an SVD computation engine, and we have shown the performance of fixed point CORDIC SVD with noise and degradation due to high MMSVR, adding an extra receive antenna (3x4 versus 3x3) can greatly improve the performance of the fixed point CORDIC implementation. For example a 4x2 Closed Loop MIMO-OFDM should decrease the MMSVR and is recommended for fixed point implementation.
 
@@ -989,24 +978,14 @@ For a demonstration of adding a receive chain to a  2x2  Open Loop MIMO-OFDM sho
 
 \chapter{MIMO OFDM Repository}
 \paragraph{}
-A full implementation of the fixed point SVD computation in  MIMO-OFDM systems is provided in the Capsim® based Block Diagram Modeling and Simulation environment at the GitHub Repository\cite{sdsp}:
+A full implementation of the fixed point SVD computation in  MIMO-OFDM systems is provided in the Capsim$\textsuperscript{\textregistered}$ based Block Diagram Modeling and Simulation environment at the GitHub Repository\cite{sdsp}:
 \paragraph{}
         https://github.com/silicondsp/mimo-ofdm-release
 \paragraph{}
-The Capsim® simulation includes both Open Loop MIMO-OFDM systems and Closed Loop MIMO-OFDM systems with CSI feedback. Floating point implementations using LAPACK for matrix operations are also included for comparison with fixed point CORDIC operation implementations.
+The Capsim$\textsuperscript{\textregistered}$ simulation includes both Open Loop MIMO-OFDM systems and Closed Loop MIMO-OFDM systems with CSI feedback. Floating point implementations using LAPACK for matrix operations are also included for comparison with fixed point CORDIC operation implementations.
 
 
-
-
-
-
-
-
-
-
-
-
-\newpage
+\pagebreak
 
 
 \bibliographystyle{plain}
@@ -1014,6 +993,16 @@ The Capsim® simulation includes both Open Loop MIMO-OFDM systems and Closed Loo
 
 \bibliography{MIMO-OFDM_SVD_CORDIC_Operations}
 
+\pagebreak
+\begin{figure}[hbtp]
+  \centering 
+    \includegraphics [width=0.5in, left]{./Figures/sd-logo-tm_sm.png}
+    \captionsetup{labelformat=empty} % Apply the empty format for this figure
+  \caption{}
+  \label{fig:sdsp}
+\end{figure}
+
+\paragraph{Sasan Ardalan} received his Diploma from Alborz, Tehran, Iran. He received his Ph.D. from North Carolina State University in Electrical Engineering  in 1983. He was an Associate Professor at NC State in 1991. He was an Adjunct Professor at Duke University.  He has published many articles in  refereed journals in electronics. He has 12 issued US patents.
 
 \pagebreak
 \chapter{GNU Free Documentation License}
