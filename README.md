@@ -589,14 +589,14 @@ See the Block Diagram of a full system <a href="#mimo-ofdm">here</a>.
             <td>1</td>
             <td>Krn_Compute2x2SVDCxMatrix.c </td>
             <td>Compute SVD 2x2 Complex Matrix CORDIC Fixed Point</td>
-            <td>Adalan</td>
+            <td>Ardalan</td>
             <td>2007</td>
         </tr>
         <tr>
             <td>2</td>
             <td>Krn_Compute2x2SVDCxMatrixFP.c </td>
             <td>Compute SVD 2x2 Complex Matrix CORDIC Floating Point</td>
-            <td>Adalang</td>
+            <td>Ardalan</td>
             <td>2007</td>
         </tr>Ardalan
         <tr>
